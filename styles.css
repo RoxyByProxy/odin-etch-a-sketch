@@ -1,0 +1,30 @@
+body {
+    display: flex;
+}
+
+#buttons {
+    display: flex;
+    justify-content: space-around;
+    flex: 1 0 auto;
+}
+
+button {
+    flex: 0 1 auto;
+}
+
+#board {
+    display: flex;
+    flex: 1 1 0;
+}
+
+.pixel {
+    flex: 1 1 0;
+}
+
+.pixel#blank {
+    background-color: white;
+}
+
+.pixel#black {
+    background-color: black;
+}
