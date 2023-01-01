@@ -29,8 +29,6 @@ button {
 .pixel {
     flex: 1 1 0;
     background-color: white;
-    border: 2px;
-    border-color: red;
     height: 67px;
     width: 67px;
 }
