@@ -65,18 +65,26 @@ eventListeners();
 //proceed to button and prompt
 //clear existing grid with function
 function boardClear() {
-    const blocks = document.querySelectorAll('.board');
-    blocks.forEach((block), => {
-        board.removeChild(block);
+    const blocks = document.querySelectorAll('.block');
+    blocks.forEach((unit) => {
+        board.removeChild(unit);
     })
 }
 
 //function to prompt user for grid size
 function buttonPrompt() {
-    let size = prompt('What scale would you like to resize the board to? Respond with a single number representing one row of pixels.');
+    let size = prompt('What scale would you like to resize the board to? Respond with a single number between 1 and 100 representing one row of pixels.');
+    if (size > 100) {
+        size = 100;
+    }
+    else if (typeof(size) != Number) {
+        size = 16;
+    }
+    boardClear();
     drawPixels(size);
     eventListeners();
 }
 
 //allow drawPixels() to set width of blocks and width/height of pixels
 //setup event listener on button
+change.addEventListener('click', buttonPrompt);
