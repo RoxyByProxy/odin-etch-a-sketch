@@ -13,15 +13,28 @@ function drawPixels(resolution) {
         const pix = document.createElement('div');
         pix.classList.add('pixel', 'blank');
         //allows identification of specific pixels
-        pix.setAttribute('id', x);
+        pix.setAttribute('id', `p${x}`);
         board.appendChild(pix);
     }
 }
 
 //create function to darken squares by adding a class
 function blacken(id) {
-    const self = document.querySelector('#' + id);
-    self.classList.add(black);
+    const self = document.querySelector(`#${id}`);
+    self.classList.add('black');
 }
+
+//draw board for first time
+drawPixels(16);
+
+//make a listener for debugging reasons
+function listen() {
+    blacken(this.id);
+}
+
 //set up listeners on squares
+const pixels = document.querySelectorAll('.pixel');
+pixels.forEach((unit) => {
+    unit.addEventListener('mouseover', listen)
+})
 //proceed to button and prompt
