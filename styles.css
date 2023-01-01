@@ -19,9 +19,6 @@ button {
 
 .pixel {
     flex: 1 1 0;
-}
-
-.pixel.blank {
     background-color: white;
 }
 
