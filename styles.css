@@ -14,6 +14,7 @@ button {
 
 #board {
     display: flex;
+    flex-direction: column;
     flex: 1 1 0;
     height: 1072px;
     width: 1072px;
@@ -21,6 +22,7 @@ button {
 
 .block {
     display: flex;
+    width: 1072px;
     flex: 1 0 auto;
 }
 
