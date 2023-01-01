@@ -15,22 +15,18 @@ button {
 #board {
     display: flex;
     flex: 1 1 0;
-    flex-direction: column;
     height: 1072px;
     width: 1072px;
 }
 
 .block {
     display: flex;
-    width: 1072px;
     flex: 1 0 auto;
 }
 
 .pixel {
     flex: 1 1 0;
     background-color: white;
-    height: 67px;
-    width: 67px;
 }
 
 .pixel.black {
