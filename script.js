@@ -65,12 +65,17 @@ eventListeners();
 //proceed to button and prompt
 //clear existing grid with function
 function boardClear() {
-
+    const blocks = document.querySelectorAll('.board');
+    blocks.forEach((block), => {
+        board.removeChild(block);
+    })
 }
 
 //function to prompt user for grid size
 function buttonPrompt() {
-
+    let size = prompt('What scale would you like to resize the board to? Respond with a single number representing one row of pixels.');
+    drawPixels(size);
+    eventListeners();
 }
 
 //allow drawPixels() to set width of blocks and width/height of pixels
