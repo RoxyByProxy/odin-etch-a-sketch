@@ -21,10 +21,10 @@ button {
     flex: 1 1 0;
 }
 
-.pixel#blank {
+.pixel.blank {
     background-color: white;
 }
 
-.pixel#black {
+.pixel.black {
     background-color: black;
 }
