@@ -19,7 +19,7 @@ function drawPixels(resolution) {
         for (let x = 0; x < resolution; x++) {
             //populates current board with pixels
             const pix = document.createElement('div');
-            pix.classList.add('pixel', 'blank');
+            pix.classList.add('pixel', 'clear');
             //allows identification of specific pixels
             pix.setAttribute('id', `p${y}x${x}`);
             block.appendChild(pix);
@@ -31,20 +31,31 @@ function drawPixels(resolution) {
 function blacken(id) {
     const self = document.querySelector(`#${id}`);
     self.classList.add('black');
-    self.classList.remove('blank');
+    self.classList.remove('clear');
+}
+function clear(id) {
+    const self = document.querySelector(`#${id}`);
+    self.classList.add('clear');
+    self.classList.remove('black');
 }
 
 //draw board for first time
 drawPixels(16);
 
 //make a listener for debugging reasons
-function listen() {
+function listenIn() {
     blacken(this.id);
 }
-
+function listenOut() {
+    const identify = this.id;
+    setTimeout(clear, 5000, identify);
+}
 //set up listeners on squares
 const pixels = document.querySelectorAll('.pixel');
 pixels.forEach((unit) => {
-    unit.addEventListener('mouseover', listen)
+    unit.addEventListener('mouseover', listenIn)
+})
+pixels.forEach((unit) => {
+    unit.addEventListener('mouseout', listenOut)
 })
 //proceed to button and prompt
