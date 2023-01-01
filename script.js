@@ -1,7 +1,6 @@
 //initialize button and container div
 const board = document.querySelector('#board');
 const change = document.querySelector('#newBoard');
-const reset = document.querySelector('#reset');
 const randColors = document.querySelector('#randColors');
 const grey = document.querySelector('#greyscale');
 const blackandwhite = document.querySelector('#blackandwhite');
