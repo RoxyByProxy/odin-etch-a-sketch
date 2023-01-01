@@ -38,9 +38,6 @@ function clear(id) {
     self.classList.remove('black');
 }
 
-//draw board for first time
-drawPixels(16);
-
 //make a listener for debugging reasons
 function listenIn() {
     blacken(this.id);
@@ -49,12 +46,32 @@ function listenOut() {
     const identify = this.id;
     setTimeout(clear, 5000, identify);
 }
+
 //set up listeners on squares
-const pixels = document.querySelectorAll('.pixel');
-pixels.forEach((unit) => {
-    unit.addEventListener('mouseover', listenIn)
-})
-pixels.forEach((unit) => {
-    unit.addEventListener('mouseout', listenOut)
-})
+function eventListeners() {
+    const pixels = document.querySelectorAll('.pixel');
+    pixels.forEach((unit) => {
+        unit.addEventListener('mouseover', listenIn)
+    })
+    pixels.forEach((unit) => {
+        unit.addEventListener('mouseout', listenOut)
+    })
+}
+
+//initalize board
+drawPixels(16);
+eventListeners();
+
 //proceed to button and prompt
+//clear existing grid with function
+function boardClear() {
+
+}
+
+//function to prompt user for grid size
+function buttonPrompt() {
+
+}
+
+//allow drawPixels() to set width of blocks and width/height of pixels
+//setup event listener on button
