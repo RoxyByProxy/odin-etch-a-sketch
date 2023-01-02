@@ -3,7 +3,6 @@ const board = document.querySelector('#board');
 const change = document.querySelector('#newBoard');
 const randColors = document.querySelector('#randColors');
 const grey = document.querySelector('#greyscale');
-const blackandwhite = document.querySelector('#blackandwhite');
 
 //create function to draw squares
 function drawPixels(resolution) {
@@ -21,6 +20,8 @@ function drawPixels(resolution) {
             pix.classList.add('pixel', 'clear');
             //allows identification of specific pixels
             pix.setAttribute('id', `p${y}x${x}`);
+            //facilitate darken feature
+            pix.setAttribute('data-opacity', 0)
             block.appendChild(pix);
         }
     }
@@ -42,12 +43,16 @@ function darken(id) {
     const self = document.querySelector(`#${id}`);
     self.classList.add('dark');
     self.classList.remove('clear');
+    const opacity = ((self.getAttribute('data-opacity') * 10) + 1) / 10;
+    self.style.backgroundColor = `rgba(0, 0, 0, ${opacity})`;
+    self.setAttribute('data-opacity', opacity);
 }
 function clear(id) {
     const self = document.querySelector(`#${id}`);
     self.classList.add('clear');
     self.classList.remove('black', 'color', 'dark');
     self.style.backgroundColor = '';
+    self.setAttribute('data-opacity', 0);
 }
 
 //make a listener for debugging reasons
@@ -114,7 +119,17 @@ function buttonPrompt(style = '0') {
 //allow drawPixels() to set width of blocks and width/height of pixels
 //setup event listener on button
 change.addEventListener('click', buttonPrompt);
+
+//initialize colorful button
+//workaround for needing to pass an arg with buttonPrompt() not elegent, but successful
 function colorClick () {
     buttonPrompt('colors');
 }
 randColors.addEventListener('click', colorClick);
+
+//initialize darken button
+//same janky workaround
+function greyClick() {
+    buttonPrompt('darken');
+}
+grey.addEventListener('click', greyClick);
