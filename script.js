@@ -32,10 +32,22 @@ function blacken(id) {
     self.classList.add('black');
     self.classList.remove('clear');
 }
+function color(id) {
+    const self = document.querySelector(`#${id}`);
+    self.classList.add('color');
+    self.classList.remove('clear');
+    self.style.backgroundColor = ('rgb(' + Math.floor(Math.random() * 255) + ',' + Math.floor(Math.random() * 255) + ',' + Math.floor(Math.random() * 255) + ')');
+}
+function darken(id) {
+    const self = document.querySelector(`#${id}`);
+    self.classList.add('dark');
+    self.classList.remove('clear');
+}
 function clear(id) {
     const self = document.querySelector(`#${id}`);
     self.classList.add('clear');
-    self.classList.remove('black');
+    self.classList.remove('black', 'color', 'dark');
+    self.style.backgroundColor = '';
 }
 
 //make a listener for debugging reasons
@@ -48,10 +60,22 @@ function listenOut() {
 }
 
 //set up listeners on squares
-function eventListeners() {
+function eventListeners(style = '0') {
     const pixels = document.querySelectorAll('.pixel');
     pixels.forEach((unit) => {
-        unit.addEventListener('mouseover', listenIn)
+        if (style === 'darken') {
+            unit.addEventListener('mouseover', () => {
+                darken(unit.id);
+            })
+        }
+        else if (style === 'colors') {
+            unit.addEventListener('mouseover', () => {
+                color(unit.id);
+            })
+        }
+        else {
+            unit.addEventListener('mouseover', listenIn)
+        }
     })
     pixels.forEach((unit) => {
         unit.addEventListener('mouseout', listenOut)
@@ -72,19 +96,25 @@ function boardClear() {
 }
 
 //function to prompt user for grid size
-function buttonPrompt() {
-    let size = prompt('What scale would you like to resize the board to? Respond with a single number between 1 and 100 representing one row of pixels.');
+function buttonPrompt(style = '0') {
+    let size = parseInt(prompt('What scale would you like to resize the board to? Respond with a single number between 1 and 100 representing one row of pixels.'));
     if (size > 100) {
+        console.log('error: input greater than 100');
         size = 100;
     }
-    else if (typeof(size) != Number) {
+    else if (typeof(size) != 'number' || size < 1) {
+        console.log('error: input not a number, or less than 1');
         size = 16;
     }
     boardClear();
     drawPixels(size);
-    eventListeners();
+    eventListeners(style);
 }
 
 //allow drawPixels() to set width of blocks and width/height of pixels
 //setup event listener on button
 change.addEventListener('click', buttonPrompt);
+function colorClick () {
+    buttonPrompt('colors');
+}
+randColors.addEventListener('click', colorClick);
